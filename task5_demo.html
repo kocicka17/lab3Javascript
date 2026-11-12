@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Завдання 5 — Демонстрація та перевірка незмінності</title>
+</head>
+<body>
+    <h2>Лабораторна робота № 3 — Завдання 5</h2>
+   
+
+    <script>
+       
+        const initialShips = [
+            {
+                id: "S-001",
+                name: "Мрія Океану",
+                homePort: "Одеса",
+                type: "Контейнеровоз",
+                displacement: 45000,
+                captain: "Олександр Коваленко"
+            },
+            {
+                id: "S-002",
+                name: "Чорноморський Вітер",
+                homePort: "Чорноморськ",
+                type: "Танкер",
+                displacement: 62000,
+                captain: "Ігор Бондаренко"
+            },
+            {
+                id: "S-003",
+                name: "Альбатрос",
+                homePort: "Одеса",
+                type: "Балкер",
+                displacement: 38000,
+                captain: "Сергій Ткаченко"
+            }
+        ];
+
+     
+        function createShip(ships, newShip) {
+            return [...ships, newShip];
+        }
+
+       
+        function readShipById(ships, id) {
+            return ships.find(ship => ship.id === id);
+        }
+
+        function readShipsByHomePort(ships, homePort) {
+            return ships.filter(ship => ship.homePort === homePort);
+        }
+
+       
+        function updateShip(ships, id, changes) {
+            return ships.map(ship => (ship.id === id ? { ...ship, ...changes } : ship));
+        }
+
+        
+        function deleteShip(ships, id) {
+            return ships.filter(ship => ship.id !== id);
+        }
+
+        
+        function printShips(ships) {
+            for (const ship of ships) {
+                console.log(`[${ship.id}] "${ship.name}" (${ship.type}) — Порт: ${ship.homePort}, Капітан: ${ship.captain}`);
+            }
+        }
+
+             
+        console.log(" ПОЧАТКОВИЙ МАСИВ ");
+        printShips(initialShips);
+
+        
+        const afterCreate = createShip(initialShips, {
+            id: "S-004",
+            name: "Посейдон",
+            homePort: "Південний",
+            type: "Контейнеровоз",
+            displacement: 51000,
+            captain: "Дмитро Мельник"
+        });
+        console.log("\n ПІСЛЯ CREATE ");
+        printShips(afterCreate);
+
+        
+        const found = readShipById(afterCreate, "S-002");
+        console.log("\n=== READ за id 'S-002' ===");
+        console.log(found);
+
+       
+        const afterUpdate = updateShip(afterCreate, "S-002", {
+            captain: "Василь Кравчук",
+            displacement: 65000
+        });
+        console.log("\n ПІСЛЯ UPDATE ");
+        printShips(afterUpdate);
+
+        
+        const afterDelete = deleteShip(afterUpdate, "S-001");
+        console.log("\n ПІСЛЯ DELETE ");
+        printShips(afterDelete);
+
+    
+        console.log("\n ПЕРЕВІРКА НЕЗМІННОСТІ ");
+       console.log("Довжина initialShips залишилась 3:", initialShips.length === 3);
+        console.log("Початковий масив не змінився:");
+        printShips(initialShips);
+    </script>
+</body>
+</html>

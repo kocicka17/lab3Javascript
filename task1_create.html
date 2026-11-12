@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Завдання 1 — Create</title>
+</head>
+<body>
+    <script>
+        const initialShips = [
+            { id: "S-001", name: "Мрія Океану", homePort: "Одеса", type: "Контейнеровоз", displacement: 45000, captain: "Олександр Коваленко" },
+            { id: "S-002", name: "Чорноморський Вітер", homePort: "Чорноморськ", type: "Танкер", displacement: 62000, captain: "Ігор Бондаренко" },
+            { id: "S-003", name: "Альбатрос", homePort: "Одеса", type: "Балкер", displacement: 38000, captain: "Сергій Ткаченко" }
+        ];
+
+        function createShip(ships, newShip) {
+            return [...ships, newShip];
+        }
+
+        const newShip = {
+            id: "S-004",
+            name: "Посейдон",
+            homePort: "Південний",
+            type: "Контейнеровоз",
+            displacement: 51000,
+            captain: "Дмитро Мельник"
+        };
+
+        const afterCreate = createShip(initialShips, newShip);
+
+        console.log("Початковий масив (довжина):", initialShips.length, initialShips);
+        console.log("Новий масив після Create (довжина):", afterCreate.length, afterCreate);
+    </script>
+</body>
+</html>
